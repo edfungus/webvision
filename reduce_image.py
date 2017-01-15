@@ -9,7 +9,7 @@ import time
 # The default INTER_LINEAR seems to give the best results per performance
 ###
 
-image = cv.imread("image1.png")
+image = cv.imread("input/image1.png")
 image_small_linear = cv.resize(image, (int(image.shape[1]/4), int(image.shape[0]/4)))
 image_mid_linear = cv.resize(image, (int(image.shape[1]/2), int(image.shape[0]/2)))
 image_small_area = cv.resize(image, (int(image.shape[1]/4), int(image.shape[0]/4)), interpolation=cv.INTER_AREA)
@@ -75,6 +75,6 @@ cv.imshow("image_mid_nearest", image_mid_nearest)
 cv.waitKey()
 cv.destroyAllWindows()
 
-cv.imwrite('mid_linear.png',image_mid_linear)
-cv.imwrite('mid_area.png',image_mid_area)
-cv.imwrite('mid_nearest.png',image_mid_nearest)
+cv.imwrite('output/mid_linear.png',image_mid_linear)
+cv.imwrite('output/mid_area.png',image_mid_area)
+cv.imwrite('output/mid_nearest.png',image_mid_nearest)
