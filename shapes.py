@@ -114,21 +114,25 @@ class ImageWithShapes():
         for shape in shapes:
             cv.fillConvexPoly(image, np.int32(shape.points), color=fill)
 
-imageSize = 100
-triangleWidth = 10.0
-squareWidth = 10.0
+def generatePictures(count, inputDir, outputDir):
+    for i in range(count):
+        imageSize = 100
+        triangleWidth = 10.0
+        squareWidth = 10.0
 
-# Create shapes
-triangle = EquiTriangle(triangleWidth)
-square = Square(squareWidth)
+        # Create shapes
+        triangle = EquiTriangle(triangleWidth)
+        square = Square(squareWidth)
 
-# Create iamge
-image = ImageWithShapes(imageSize, imageSize, [triangle, square], (255, 255, 255))
-triangleOnly = np.full((imageSize, imageSize), 255, np.uint8)
-image.drawShapes((0,0,0), triangleOnly, [image.shapes[0]])
+        # Get shape composite
+        image = ImageWithShapes(imageSize, imageSize, [triangle, square], (255, 255, 255))
 
-#Display the image
-cv.imshow("image", np.rot90(image.image))
-cv.imshow("trianlge", np.rot90(triangleOnly))
-cv.waitKey(0)
+        # Get one shape only
+        triangleOnly = np.full((imageSize, imageSize), 255, np.uint8)
+        image.drawShapes((0,0,0), triangleOnly, [image.shapes[0]])
 
+        # Save
+        cv.imwrite(inputDir + "img_"+str(i)+".png",np.rot90(image.image))
+        cv.imwrite(outputDir + "img_"+str(i)+".png",np.rot90(triangleOnly))
+
+generatePictures(1000, "./datasets/shapes/set1_in/", "./datasets/shapes/set1_out/")
